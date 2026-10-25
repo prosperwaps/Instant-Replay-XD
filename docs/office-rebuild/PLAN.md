@@ -79,12 +79,15 @@ motion; pure `#000`, `#fff`, `#3dba3d` on quiet neutrals.
 
 | Token | Value | Means | Never used for |
 |---|---|---|---|
-| `--ink` | `#000` | Text, primary action, selected state | Status |
-| `--brand` | `#3dba3d` | The brand mark and the active-page marker in the sidebar | Status, counts, decoration |
-| `--ok` / `--ok-tint` | `#1b7a1b` / `#e7f5e7` | Done, paid, present, connected | Brand |
-| `--warn` / `--warn-tint` | `#8f5d00` / `#fbf1dc` | Needs action soon, partial | Neutral figures, completed states |
-| `--bad` / `--bad-tint` | `#b42318` / `#fdeceb` | Blocked, overdue, failed, invalid input | Decoration |
-| neutrals | `--surface`, `--page`, `--line`, `--muted` | Structure | Meaning |
+| `--black` | `#000` | Text, primary action, selected state, work in progress | Status text |
+| `--green` | `#3dba3d` | The brand mark, the active-page marker, and **done** as a shape (a locked sheet, a full meter) — the same "green = done" the Student Portal and Teacher App use | Text (2.5:1 on white is too low), counts, decoration |
+| `--ok` / `--ok-tint` | `#17701a` / `#e6f4e6` | Done, paid, present, connected — as text and badges | Brand |
+| `--warn` / `--warn-tint` | `#8a5800` / `#fbf0d9` | Needs action soon, partial | Neutral figures, completed states |
+| `--bad` / `--bad-tint` | `#b3261e` / `#fcebea` | Blocked, overdue, failed, invalid input | Decoration |
+| neutrals | `--page`, `--surface`, `--line`, `--text-muted`, `--text-faint` | Structure | Meaning |
+
+Every text pair passes WCAG AA (lowest: `--text-faint` on `--surface-sunken`, 5.1:1). Status is never shown by colour
+alone: badges carry a word, and mark-sheet glyphs differ by shape (empty, filling, inset, solid).
 
 **Type scale, 7 steps, 13px floor:** 13 · 14 · 15 (body) · 17 · 20 · 26 · 34. Figures use tabular numbers.
 
@@ -100,11 +103,11 @@ you, money formatting), Vercel (status language), Airtable / Google Sheets (keyb
 Each phase ends with: typecheck, lint and tests green in CI; the pages checked in a real browser at 1440px
 and 390px; `SECURITY.md` updated; the legacy page it replaces marked as superseded.
 
-### Phase 1 · Foundations, overview and mark sheets *(this change)*
+### Phase 1 · Foundations, overview and mark sheets *(done 2026-10-25)*
 - Tooling: npm workspaces, strict TS, ESLint (React, hooks, a11y), Vitest, GitHub Actions CI.
 - `packages/grading-engine`: normalisation, status codes (ABS, EXC, NT, MAL), adjustments with cap, weighted
   subject average, coefficients, term average, competition ranking, appreciation bands, weight validation.
-- Data layer: schema, deterministic seed (a realistic school: 6 classes, ~230 students), repository with
+- Data layer: schema, deterministic seed (a realistic school: 6 classes, 216 students), repository with
   revisions, cross-tab sync, append-only audit.
 - Domain: money in whole francs (FCFA has no subunit) with overflow-safe arithmetic, permission matrix from
   spec 02 §5, plural helper, Africa/Douala dates.

@@ -32,16 +32,19 @@ The full specification lives in [`docs/spec/`](docs/spec/). Start with `03-modul
 │   │       ├── js/    site.js · admissions.js · portal.js · admin-shell.js (shared icons + sidebar) · office.js (hosts School Admin) · office-homepage.js · office-marks.js · platform.js (platform pages) · school-data.js · teacher.js
 │   │       ├── fonts/ font files used by styles.css
 │   │       └── img/   photos, logos, illustrations
+│   ├── office/                ← School Admin rebuild (Vite + React + TypeScript): see docs/office-rebuild/PLAN.md
 │   ├── teacher/               ← Module 3 Teacher App (planned)
 │   ├── parent/                ← Module 5 Parent App (planned)
 │   └── scanner/               ← Module 4 Attendance scanner (planned)
 │
 ├── backend/
 │   └── appwrite/              ← Module 0 Platform Core: collections, functions, permissions (planned)
-├── packages/                  ← code shared between apps, e.g. the grading engine (planned)
+├── packages/
+│   └── grading-engine/        ← pure, versioned, test-covered grading rules (spec 03 §Module 2)
 │
-├── design/                    ← design-tool leftovers (Pinegrow backups, exports); not deployed
-└── archive/                   ← frozen snapshots; never edited
+├── SECURITY.md                ← security review, findings and go-live checklist
+├── design/                    ← design-tool leftovers (Pinegrow backups, exports); kept out of git
+└── archive/                   ← frozen snapshots; kept out of git
 ```
 
 ## Rules that keep this tidy
@@ -80,7 +83,23 @@ npx serve apps/web
 
 Then visit `http://localhost:3000` (homepage), `/admissions.html`, `/portal.html`, `/office/` (School Admin), `/teacher/`.
 
-School Admin is currently a front-end demonstration: data lives in the browser's `localStorage` only. Sign in with a platform account (e.g. `e.ngwa@bchs.edu.cm`, any password; privileged roles then enter any 6-digit code).
+The legacy School Admin at `/office/` is a front-end demonstration: data lives in the browser's `localStorage` only. Sign in with a platform account (e.g. `e.ngwa@bchs.edu.cm`, any password; privileged roles then enter any 6-digit code).
+
+### The new School Admin (`apps/office`)
+
+School Admin is being rebuilt as a typed, tested app. The plan, phases and design system are in
+[`docs/office-rebuild/PLAN.md`](docs/office-rebuild/PLAN.md); the security review is [`SECURITY.md`](SECURITY.md).
+Needs Node 20.19 or newer.
+
+```
+npm install
+npm run dev      # http://localhost:5174 — choose a demo account to sign in
+npm run check    # typecheck, lint and every test
+npm run build    # production build in apps/office/dist
+```
+
+Deploy `apps/office/dist` as its own Cloudflare Pages project; `_redirects` and `_headers` (CSP and hardening headers)
+are included.
 
 ### Testing the Teacher App on a phone
 
@@ -100,7 +119,7 @@ When you change any Teacher App file, bump `VERSION` in `apps/web/teacher/sw.js`
 |---|---|---|
 | 0 Platform core | 03 §Module 0 | clickable prototype inside School Admin (`apps/web/office`, pages drawn by `platform.js`); backend not started |
 | 1 Website, admissions, portal | 03 §Module 1 | static UI in `apps/web` |
-| 2 Admin dashboard | 03 §Module 2 | static UI + localStorage demo in `apps/web/office`; **Mark sheets** and **Corrections** pages read what the Teacher App synced (`office-marks.js`) |
+| 2 Admin dashboard | 03 §Module 2 | **Rebuild in progress in `apps/office`** (Phase 1 done: overview, mark sheets with entry, submit, lock and audited corrections, audit log; grading engine in `packages/grading-engine`). Legacy static demo still in `apps/web/office` until every page has moved |
 | 3 Teacher app | 03 §Module 3 | installable phone app (PWA) in `apps/web/teacher`, MVP + P1 complete as a prototype: PIN, grade entry, review & submit, offline outbox and sync centre, server-time edit window, correction requests, multi-paper combining, class-master remarks/conduct/attendance, exam workspace (draft → HOD review → sealed → published to the Student Portal); shared data in `assets/js/school-data.js` |
 | 4 Attendance | 03 §Module 4 | Gate app (installable, offline) in `apps/web/gate`: stage 1 done (staff on duty + PIN, student list on the phone, manual check-in with reason, today's arrivals, sync with earliest-wins and clock correction, geometric avatars). Next: camera QR scanning, then ID cards and reports in School Admin |
 | 5 Parent app | 03 §Module 5 | not started |
