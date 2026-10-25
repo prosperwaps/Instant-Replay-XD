@@ -1,0 +1,26 @@
+# dependencies & builds
+node_modules/
+dist/
+build/
+.vercel/
+
+# secrets: never commit API keys (Appwrite, Campay/Monetbil, Firebase)
+.env
+.env.*
+!.env.example
+
+# editor / OS
+.vscode/*
+!.vscode/extensions.json
+.DS_Store
+Thumbs.db
+
+# design-tool backups (kept locally, not versioned)
+design/pinegrow/_pgbackup/
+_pgbackup/
+_pginfo/
+
+# design-tool leftovers and frozen snapshots live outside git
+archive/
+design/
+outputs/

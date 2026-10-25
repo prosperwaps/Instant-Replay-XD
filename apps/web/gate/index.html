@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#000000">
+  <title>BCHS Gate</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/png" sizes="192x192" href="../teacher/icons/icon-192.png">
+  <link rel="apple-touch-icon" href="../teacher/icons/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="BCHS Gate">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap">
+  <!-- Same dark identity as the Teacher App: teacher.css is the base, gate.css adds the gate screens. -->
+  <link rel="stylesheet" href="../assets/css/styles.css"><link rel="stylesheet" href="../assets/css/teacher.css"><link rel="stylesheet" href="../assets/css/gate.css">
+</head>
+<body class="tp gt">
+  <!-- Sign-in, "who is on duty" and PIN all render here -->
+  <main class="tp-gate" id="gate" aria-live="polite"></main>
+
+  <div class="ta-app" id="app">
+    <header class="tp-top">
+      <div class="tp-top-inner">
+        <button class="tp-brand" data-page="gate" aria-label="Gate"><span class="tp-brand-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3l8 4-8 4-8-4 8-4zM6 11v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5" stroke="#3DBA3D" stroke-width="1.8"/></svg></span><span>BCHS<small>Gate app</small></span></button>
+        <nav class="tp-tabs" id="railNav" aria-label="Gate app sections"></nav>
+        <div class="tp-top-actions"><span id="syncPill"></span><button class="tp-avatar" id="meBtn" data-page="account" aria-label="Gate phone and staff on duty">—</button></div>
+      </div>
+    </header>
+    <section class="tp-band" aria-label="Page header">
+      <div class="tp-band-inner">
+        <button class="tp-back" id="backBtn" aria-label="Back" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <div class="tp-band-text"><span class="tp-label" id="crumb"></span><h1 id="title"></h1></div>
+        <div class="tp-band-actions" id="topActions"></div>
+        <span class="tp-band-art" id="bandArt" aria-hidden="true"></span>
+      </div>
+    </section>
+    <main class="ta-content" id="view"></main>
+    <nav class="ta-tabbar three" id="tabbar" aria-label="Gate app sections"></nav>
+  </div>
+
+  <!-- Camera scanner: full screen; the square shows exactly the part of the picture that is read -->
+  <div class="gt-scan" id="scanner" aria-hidden="true" aria-label="QR scanner">
+    <video id="scanVideo" playsinline muted autoplay></video>
+    <div class="gt-scan-frame" id="scanFrame" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <header class="gt-scan-top">
+      <button class="gt-scan-btn" data-act="closeScan" aria-label="Close the scanner"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      <div class="gt-scan-status" id="scanStatus"></div>
+      <button class="gt-scan-btn text" data-act="scanStats" aria-label="Show scanning speed">ms</button>
+    </header>
+    <p class="gt-scan-speed" id="scanSpeed" hidden></p>
+    <p class="gt-scan-hint" id="scanHint"></p>
+    <div class="gt-scan-sheet" id="scanSheet" aria-live="polite"></div>
+    <footer class="gt-scan-tools" id="scanTools"></footer>
+  </div>
+  <!-- iPhone haptic tick (iOS 18+): toggling a native switch is the only way Safari vibrates -->
+  <label id="hapticSwitch" class="gt-haptic" aria-hidden="true"><input type="checkbox" switch tabindex="-1"></label>
+
+  <!-- Full-screen confirmation after each check-in: big face, name, class and time -->
+  <div class="gt-result" id="result" aria-live="assertive"></div>
+  <div class="modal-layer" id="modalLayer" aria-hidden="true"><div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><button class="modal-close" data-close aria-label="Close">×</button><h2 id="modalTitle"></h2><div id="modalBody"></div></div></div>
+  <div class="toast" id="toast" role="status"></div>
+
+  <script src="../assets/js/school-data.js"></script>
+  <script src="../assets/js/gate.js"></script>
+</body>
+</html>

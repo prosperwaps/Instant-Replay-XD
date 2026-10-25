@@ -1,0 +1,156 @@
+/* ============ GATE APP (Module 4) ============
+   Built on teacher.css (same dark identity: black main colour, green accent, white text
+   and hairlines, Space Grotesk + JetBrains Mono, pure palette only, no stock icons).
+   This file adds only the gate screens: the clock and big actions, manual check-in,
+   today's list and the full-screen result after each check-in.
+   Speed at the gate matters: huge touch targets, one-hand reach, readable at arm's length.
+
+   The soft surfaces (near-black panels, rounded corners, no white lines) come from teacher.css. */
+
+/* Geometric avatar standing in for the student photo */
+.geo-avatar { display: block; width: 100%; height: 100%; }
+.ta-tok.av { padding: 0; overflow: hidden; border-radius: 12px; }
+
+/* ---------- Gate home ---------- */
+.gt-hero { display: grid; grid-template-columns: 1fr 1.3fr 1.3fr; gap: 1.2rem; margin-bottom: 1.6rem; }
+.gt-clock { background: var(--panel); border-radius: var(--r); padding: 1.2rem 1.4rem; display: flex; flex-direction: column; justify-content: center; gap: .3rem; }
+.gt-clock b { font: 700 clamp(2.8rem, 5vw, 4rem)/1 var(--tp-mono); letter-spacing: -.04em; }
+.gt-clock small { font-size: .92rem; }
+.gt-clock.late small { align-self: flex-start; background: var(--fg); color: var(--bg); font-weight: 700; padding: .15rem .6rem; border-radius: 999px; }
+
+.gt-big { display: grid; grid-template-columns: 64px minmax(0, 1fr); grid-template-rows: auto auto; column-gap: 1.1rem; align-items: center; align-content: center; min-height: 150px; padding: 1.2rem 1.4rem; border: 0; border-radius: 20px; background: var(--g); color: var(--bg); text-align: left; cursor: pointer; }
+.gt-big b { font-size: 1.45rem; line-height: 1.15; }
+.gt-big small { grid-column: 2; font-size: .9rem; line-height: 1.4; margin-top: .3rem; }
+.gt-big-mark { grid-row: span 2; width: 64px; height: 64px; }
+.gt-big:hover { background: var(--fg); }
+.gt-big.alt { background: var(--panel); color: var(--fg); }
+.gt-big.alt:hover { background: var(--panel-2); }
+.gt-big.alt:hover b { color: var(--g); }
+.gt-big-mark.num { display: grid; place-items: center; background: var(--g); border-radius: 14px; color: var(--bg); font: 700 1.5rem var(--tp-mono); }
+
+.gt-classlist { display: grid; }
+.gt-classrow { display: grid; gap: .55rem; padding: .9rem 1.2rem; border: 0; border-bottom: var(--seam); background: none; color: var(--fg); text-align: left; cursor: pointer; }
+.gt-classrow:last-child { border-bottom: 0; }
+.gt-classrow b { display: block; font-weight: 600; }
+.gt-classrow small { font: .8rem var(--tp-mono); }
+.gt-classrow:hover b { color: var(--g); }
+
+/* ---------- Manual check-in ---------- */
+.gt-classes { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; }
+.gt-class { display: grid; gap: .5rem; padding: 1.3rem 1.3rem; border: 0; border-radius: var(--r); background: var(--panel); color: var(--fg); text-align: left; cursor: pointer; min-height: 130px; align-content: center; }
+.gt-class b { font-size: 1.3rem; }
+.gt-class small { font: .82rem var(--tp-mono); }
+.gt-class:hover { background: var(--panel-2); }
+.gt-class:hover b { color: var(--g); }
+
+.gt-manual { display: grid; grid-template-columns: minmax(280px, 380px) minmax(0, 1fr); gap: 1.6rem; align-items: start; }
+.gt-pad { display: grid; gap: .8rem; }
+.gt-classpick { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: .1rem 1rem; padding: .85rem 1.1rem; border: 0; border-radius: var(--r); background: var(--panel); color: var(--fg); text-align: left; cursor: pointer; }
+.gt-classpick .tp-label { grid-column: 1; }
+.gt-classpick b { grid-column: 1; font-size: 1.15rem; }
+.gt-classpick small { grid-row: 1 / span 2; grid-column: 2; color: var(--g); text-decoration: underline; text-underline-offset: 4px; font-weight: 600; }
+.gt-classpick:hover { background: var(--panel-2); }
+.gt-num { display: flex; align-items: baseline; gap: .8rem; padding: .8rem 1.1rem; border-radius: var(--r); background: var(--panel); box-shadow: inset 0 0 0 2px var(--g); }
+.gt-num span { font: 600 .9rem var(--tp-mono); color: var(--g); }
+.gt-num b { font: 700 3.2rem/1 var(--tp-mono); letter-spacing: -.03em; }
+.gt-num.empty { box-shadow: none; }
+.gt-keys { max-width: none; margin: 0; }
+.gt-keys .ta-key { height: 64px; font-size: 1.5rem; }
+
+.gt-preview { background: var(--panel); border-radius: 20px; padding: 1.4rem; display: grid; gap: 1rem; align-content: start; }
+.gt-preview.blank { min-height: 300px; align-content: center; justify-items: center; text-align: center; }
+.gt-preview.blank .art { width: 112px; }
+.gt-preview.blank p { max-width: 34ch; font-size: .95rem; }
+.gt-face { width: min(240px, 60vw); aspect-ratio: 1; border-radius: 22px; overflow: hidden; }
+.gt-who b { display: block; font-size: 1.6rem; line-height: 1.15; }
+.gt-who small { display: block; font: 600 .95rem var(--tp-mono); margin-top: .3rem; }
+.gt-reasons { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .45rem; }
+.gt-reasons .ta-chip { font: 600 .86rem var(--tp-font); min-height: 50px; }
+.gt-preview .ta-notice { margin: 0; }
+.gt-small { font-size: .84rem; }
+
+/* ---------- Today ---------- */
+.gt-filters { display: flex; flex-wrap: wrap; gap: .6rem; margin-bottom: 1.2rem; }
+.gt-filters .seg { flex: 1 1 100%; }
+.gt-filters .seg button { flex: 1; }
+.gt-select, .gt-search { height: 44px; padding: 0 .8rem; border: var(--line); font-size: .95rem; }
+.gt-select { flex: 0 0 220px; }
+.gt-search { flex: 1; min-width: 180px; }
+.gt-select:focus, .gt-search:focus { outline: none; border-color: var(--g); box-shadow: 0 0 0 1px var(--g); }
+
+/* ---------- Result after each check-in ---------- */
+.gt-result { position: fixed; inset: 0; z-index: 80; display: none; place-items: center; padding: 1.2rem; background: var(--bg); cursor: pointer; }
+.gt-result.open { display: grid; }
+.gt-result-card { width: min(440px, 100%); display: grid; justify-items: center; gap: .55rem; text-align: center; background: var(--panel); border-radius: 26px; overflow: hidden; padding: 0 1.4rem 1.8rem; }
+.gt-result-head { width: calc(100% + 2.8rem); margin: 0 -1.4rem .8rem; padding: 1rem; font: 700 1.25rem var(--tp-mono); text-transform: uppercase; letter-spacing: .04em; }
+.gt-result.ok .gt-result-head { background: var(--g); color: var(--bg); }
+.gt-result.late .gt-result-head { background: var(--fg); color: var(--bg); }
+.gt-result.dup .gt-result-head { background: var(--panel-2); color: var(--g); }
+.gt-result.ok .gt-result-card { box-shadow: 0 0 0 3px var(--g); }
+
+.gt-result-face { width: min(260px, 64vw); aspect-ratio: 1; border-radius: 28px; overflow: hidden; }
+.gt-result-name { font-size: 1.8rem; line-height: 1.15; margin-top: .4rem; }
+.gt-result-meta { font: 600 1.05rem var(--tp-mono); }
+.gt-result p { font-size: 1rem; }
+.gt-result small { font: .78rem var(--tp-mono); margin-top: .6rem; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1100px) {
+  .gt-hero { grid-template-columns: 1fr 1fr; }
+  .gt-clock { grid-column: 1 / -1; flex-direction: row; align-items: baseline; flex-wrap: wrap; gap: .4rem 1rem; }
+}
+
+@media (max-width: 899px) {
+  .ta-tabbar.three { grid-template-columns: repeat(3, 1fr); }
+  .gt-hero { grid-template-columns: 1fr; gap: .8rem; }
+  .gt-big { min-height: 108px; padding: 1rem 1.1rem; grid-template-columns: 52px minmax(0, 1fr); }
+  .gt-big-mark { width: 52px; height: 52px; }
+  .gt-big b { font-size: 1.25rem; }
+  .gt-manual { grid-template-columns: 1fr; gap: 1rem; }
+  .gt-preview { order: -1; padding: 1rem; grid-template-columns: 96px minmax(0, 1fr); align-items: center; }
+  .gt-preview > :not(.gt-face):not(.gt-who) { grid-column: 1 / -1; }
+  .gt-preview.blank { min-height: 0; grid-template-columns: 1fr; padding: 1rem; }
+  .gt-preview.blank .art { width: 72px; }
+  .gt-face { width: 96px; border-radius: 16px; }
+  .gt-who b { font-size: 1.2rem; }
+  .gt-reasons { grid-template-columns: 1fr 1fr; }
+  .gt-num b { font-size: 2.4rem; }
+  .gt-keys .ta-key { height: 56px; }
+  .gt-select { flex: 1 1 100%; }
+}
+
+/* ---------- Camera scanner ---------- */
+.gt-scan { --vf: min(72vw, 360px); position: fixed; inset: 0; z-index: 85; display: none; background: #000; overflow: hidden; touch-action: manipulation; }
+.gt-scan.open { display: block; }
+.gt-scan video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+/* The square: everything outside it is dimmed so the eye goes to the read area. */
+.gt-scan-frame { position: absolute; left: 50%; top: 50%; width: var(--vf); height: var(--vf); transform: translate(-50%, -50%); border-radius: 30px; box-shadow: 0 0 0 200vmax rgba(0, 0, 0, .55); pointer-events: none; }
+.gt-scan-frame i { position: absolute; width: 46px; height: 46px; border: 5px solid var(--g); transition: border-color .12s ease; }
+.gt-scan-frame i:nth-child(1) { top: 0; left: 0; border-right: 0; border-bottom: 0; border-top-left-radius: 30px; }
+.gt-scan-frame i:nth-child(2) { top: 0; right: 0; border-left: 0; border-bottom: 0; border-top-right-radius: 30px; }
+.gt-scan-frame i:nth-child(3) { bottom: 0; left: 0; border-right: 0; border-top: 0; border-bottom-left-radius: 30px; }
+.gt-scan-frame i:nth-child(4) { bottom: 0; right: 0; border-left: 0; border-top: 0; border-bottom-right-radius: 30px; }
+.gt-scan-frame.hit i { border-color: var(--fg); }
+.gt-scan-frame.hit { box-shadow: 0 0 0 200vmax rgba(0, 0, 0, .55), inset 0 0 0 4px var(--g); }
+
+.gt-scan-top { position: absolute; top: 0; left: 0; right: 0; display: flex; align-items: center; gap: .8rem; padding: calc(env(safe-area-inset-top) + .8rem) 1rem .8rem; }
+.gt-scan-btn { width: 46px; height: 46px; flex: none; display: grid; place-items: center; border: 0; border-radius: 50%; background: var(--panel); color: var(--fg); cursor: pointer; }
+.gt-scan-btn svg { width: 20px; height: 20px; }
+.gt-scan-btn.text { font: 700 .8rem var(--tp-mono); }
+.gt-scan-status { flex: 1; text-align: center; }
+.gt-scan-status b { display: block; font-size: 1.05rem; }
+.gt-scan-status small { display: block; font: .74rem var(--tp-mono); color: var(--g); }
+.gt-scan-speed { position: absolute; top: calc(env(safe-area-inset-top) + 4.6rem); left: 50%; transform: translateX(-50%); padding: .3rem .8rem; border-radius: 999px; background: var(--panel); font: .74rem var(--tp-mono); white-space: nowrap; }
+.gt-scan-hint { position: absolute; left: 0; right: 0; top: calc(50% + var(--vf) / 2 + 1.1rem); text-align: center; font-weight: 600; font-size: .95rem; }
+
+.gt-scan-sheet { position: absolute; left: .8rem; right: .8rem; bottom: calc(env(safe-area-inset-bottom) + 4.6rem); max-width: 520px; margin: 0 auto; display: grid; gap: .45rem; padding: 1rem 1.15rem 1.1rem; border-radius: 22px; background: var(--panel); box-shadow: inset 0 4px 0 var(--g); opacity: 0; transform: translateY(12px); pointer-events: none; transition: opacity .12s ease, transform .12s ease; }
+.gt-scan-sheet.show { opacity: 1; transform: none; pointer-events: auto; }
+.gt-read-text { font-size: 1.05rem; line-height: 1.35; overflow-wrap: anywhere; }
+.gt-scan-sheet small { font: .74rem var(--tp-mono); line-height: 1.5; }
+.gt-read-act { display: flex; gap: .5rem; margin-top: .2rem; }
+.gt-read-act .mini-btn { flex: 1; }
+
+.gt-scan-tools { position: absolute; left: 0; right: 0; bottom: 0; display: flex; justify-content: center; flex-wrap: wrap; gap: .5rem; padding: .8rem 1rem calc(env(safe-area-inset-bottom) + .9rem); }
+.gt-scan-pill { height: 44px; padding: 0 1.05rem; border: 0; border-radius: 999px; background: var(--panel); color: var(--fg); font: 600 .86rem var(--tp-font); cursor: pointer; }
+.gt-scan-pill.on { background: var(--g); color: var(--bg); }
+.gt-haptic { position: fixed; left: -200px; top: 0; width: 1px; height: 1px; opacity: 0; overflow: hidden; pointer-events: none; }

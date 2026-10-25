@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en" class="admin-root">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>BCHS Nkwen | School Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="../assets/css/styles.css"><link rel="stylesheet" href="../assets/css/office.css"><link rel="stylesheet" href="../assets/css/office-homepage.css"><link rel="stylesheet" href="../assets/css/platform.css">
+</head>
+<!-- School admin: the School Office (Module 2) and the Platform Console (Module 0) in one app.
+     office.js hosts the page and the shared sidebar; platform.js renders the platform pages. -->
+<body class="admin-body">
+  <main class="admin-login" id="loginGate">
+    <aside class="login-aside">
+      <div class="brand-row"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3l8 4-8 4-8-4 8-4zM6 11v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5" stroke="#3DBA3D" stroke-width="1.6"/></svg>BCHS Nkwen · School admin</div>
+      <svg class="art login-art" viewBox="0 0 360 220" aria-hidden="true" focusable="false"><rect y="40" width="150" height="180" fill="#fff"/><circle cx="75" cy="120" r="44" fill="#000"/><circle cx="75" cy="120" r="18" fill="#3dba3d"/><path d="M170 220A110 110 0 0 1 280 110V220Z" fill="#3dba3d"/><rect x="190" width="90" height="16" fill="#fff"/><rect x="190" y="34" width="56" height="16" fill="#fff"/><rect x="300" y="110" width="60" height="110" fill="#fff"/><rect x="316" y="126" width="28" height="28" fill="#000"/><circle cx="335" cy="40" r="22" fill="#3dba3d"/></svg>
+      <div>
+        <h1>The school office and the platform, in one place.</h1>
+        <p>Admissions, students, staff, attendance, marks, fees and communication, together with accounts, permissions, devices, sync and backups.</p>
+      </div>
+      <ul><li>Two-step sign-in for privileged roles</li><li>Second-person approval for sensitive changes</li><li>Every sensitive action written to the audit log</li></ul>
+      <small>Staff access only. Activity is recorded.</small>
+    </aside>
+    <div class="login-main">
+      <form class="login-card" id="loginForm">
+        <span class="brand-word">Sign in to School Admin</span>
+        <p class="login-sub">Use your school staff account.</p>
+        <div class="login-field"><label for="loginEmail">Staff email</label><input id="loginEmail" type="email" value="e.ngwa@bchs.edu.cm" autocomplete="username" required></div>
+        <div class="login-field"><label for="loginPass">Password</label><input id="loginPass" type="password" value="demo-password" autocomplete="current-password" required></div>
+        <button class="btn btn-primary" type="submit">Continue</button>
+        <p class="login-note">Demo accounts (any password): e.ngwa@bchs.edu.cm (System Admin), s.tanyi@bchs.edu.cm (Principal), p.achiri@bchs.edu.cm (Bursar, no 2FA yet). Records are stored only in this browser; payments, email and SMS need a connected service.</p>
+      </form>
+      <form class="login-card" id="mfaForm" hidden>
+        <span class="brand-word">Two-step verification</span>
+        <p class="login-sub" id="mfaWho">Privileged account</p>
+        <div class="login-field"><label for="mfaCode">6-digit code from your authenticator app</label><input id="mfaCode" inputmode="numeric" pattern="\d{6}" maxlength="6" placeholder="000000" required autocomplete="one-time-code"></div>
+        <button class="btn btn-primary" type="submit">Verify and sign in</button>
+        <p class="login-note">Demo: any 6 digits. Required for Principal, Vice Principal, Registrar, Bursar and System Admin. <a href="#" id="mfaBack">Back</a></p>
+      </form>
+    </div>
+  </main>
+  <div class="admin-app" id="adminApp">
+    <aside class="admin-sidebar" id="sidebar">
+      <div class="brand-row"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3l8 4-8 4-8-4 8-4zM6 11v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5" stroke="#3DBA3D" stroke-width="1.6"/></svg><span>BCHS Nkwen<small>School admin</small></span></div>
+      <nav class="admin-nav" id="appNav" aria-label="School admin"></nav>
+      <div class="sidebar-foot">
+        <span class="avatar green" id="userInitials">—</span>
+        <div class="sidebar-user"><b id="userName">—</b><small id="userRole">—</small></div>
+        <button class="side-icon-btn" id="backupBtn" title="Export office backup" aria-label="Export office backup"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 4v11M7 10l5 5 5-5M4 20h16"/></svg></button>
+        <button class="side-icon-btn" id="logoutBtn" title="Sign out" aria-label="Sign out"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 4h4v16h-4M10 8l-4 4 4 4M6 12h10"/></svg></button>
+      </div>
+    </aside>
+    <div class="admin-main">
+      <header class="admin-topbar">
+        <button class="menu-btn" id="menuBtn" aria-label="Open navigation"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+        <div class="topbar-title"><p class="crumb" id="crumb">School office</p><h1 id="topbarTitle">Overview</h1></div>
+        <label class="topbar-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/></svg><input id="globalSearch" type="search" placeholder="Find a student" aria-label="Search"><kbd>/</kbd></label>
+        <label class="pc-actor"><span>Acting as</span><select id="actorSelect" aria-label="Switch demo user"></select></label>
+        <div class="admin-user-chip"><span class="dot"></span><span id="today"></span></div>
+      </header>
+      <div class="admin-panel-body" id="appContent" aria-live="polite"></div>
+    </div>
+  </div>
+  <div class="modal-layer" id="modalLayer" aria-hidden="true"><div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><button class="modal-close" id="modalClose" aria-label="Close">×</button><h2 id="modalTitle"></h2><form id="modalForm"></form></div></div>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="../assets/js/admin-shell.js"></script>
+  <script src="../assets/js/school-data.js"></script>
+  <script src="../assets/js/platform.js"></script>
+  <script src="../assets/js/office.js"></script>
+  <script src="../assets/js/office-homepage.js"></script>
+  <script src="../assets/js/office-marks.js"></script>
+</body>
+</html>
