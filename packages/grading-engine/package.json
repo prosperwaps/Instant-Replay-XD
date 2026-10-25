@@ -1,0 +1,14 @@
+{
+  "name": "@cbc/grading-engine",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Pure, versioned grading rules for CBC schools: normalisation, status codes, weights, coefficients, averages and ranks.",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc -p tsconfig.json"
+  }
+}
