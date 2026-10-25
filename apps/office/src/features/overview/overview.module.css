@@ -1,0 +1,151 @@
+.top {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(280px, 1fr);
+  align-items: start;
+  gap: var(--space-6);
+}
+
+/* ---------- Needs you ---------- */
+
+.needs {
+  border-top: var(--rule);
+}
+
+.needs li + li {
+  border-top: var(--rule);
+}
+
+.need {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-6);
+  color: inherit;
+  text-decoration: none;
+}
+
+.needLink:hover {
+  background: var(--surface-sunken);
+}
+
+.needLink:focus-visible {
+  outline-offset: -2px;
+}
+
+.needIcon {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  flex: none;
+  border: var(--rule);
+}
+
+.bad {
+  border-color: var(--bad);
+  background: var(--bad-tint);
+  color: var(--bad);
+}
+
+.warn {
+  border-color: var(--warn);
+  background: var(--warn-tint);
+  color: var(--warn);
+}
+
+.neutral {
+  background: var(--page);
+}
+
+.needText {
+  display: grid;
+  flex: 1;
+  gap: 2px;
+  min-width: 0;
+}
+
+.needTitle {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1) var(--space-3);
+}
+
+.needTitle b {
+  font-weight: var(--weight-semibold);
+}
+
+.needText > span:last-child {
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+}
+
+.needChevron {
+  flex: none;
+  color: var(--text-muted);
+}
+
+/* ---------- Glance tiles ---------- */
+
+.glance {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.tile {
+  display: grid;
+  gap: var(--space-1);
+  padding: var(--space-5) var(--space-6) var(--space-6);
+  border: var(--rule);
+  background: var(--surface);
+}
+
+.tileTitle {
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  letter-spacing: 0;
+}
+
+.tileFigure {
+  font-size: var(--text-3xl);
+  font-weight: var(--weight-semibold);
+  font-variant-numeric: tabular-nums;
+  line-height: var(--leading-tight);
+  letter-spacing: -0.02em;
+}
+
+.tileContext {
+  margin-bottom: var(--space-3);
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+}
+
+/* ---------- Board ---------- */
+
+.boardPanel {
+  margin-top: var(--space-6);
+}
+
+@media (max-width: 1100px) {
+  .top {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .glance {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .need {
+    align-items: flex-start;
+    gap: var(--space-3);
+    padding: var(--space-4);
+  }
+
+  .needIcon {
+    width: 32px;
+    height: 32px;
+  }
+}

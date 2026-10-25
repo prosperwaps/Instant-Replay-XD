@@ -1,0 +1,102 @@
+/*
+ * School Admin design tokens. Every value the app uses comes from here.
+ * Names say what a value IS, never what it is used for somewhere else, so they cannot drift
+ * the way the prototype's did (--black meaning white).
+ *
+ * Colour: one meaning per colour — see docs/office-rebuild/PLAN.md §3.
+ */
+:root {
+  /* Core palette (project rule: pure black, pure white, brand green) */
+  --black: #000;
+  --white: #fff;
+  --green: #3dba3d;
+
+  /* Quiet neutrals for structure. Never used to signal status. */
+  --page: #f4f4f1;
+  --surface: var(--white);
+  --surface-sunken: #f9f9f7;
+  --line: #e2e2dd;
+  --line-strong: #c9c9c3;
+  --text: var(--black);
+  --text-muted: #55554f; /* 7.4:1 on white */
+  --text-faint: #6b6b64; /* 5.3:1 on white — the lightest text allowed */
+
+  /* Sidebar (on black) */
+  --side-bg: var(--black);
+  --side-raised: #1a1a1a;
+  --side-line: #262626;
+  --side-text: #f2f2f2;
+  --side-muted: #a3a39c; /* 8.1:1 on black */
+
+  /* Status. Text colours pass 4.5:1 on their tint and on white. */
+  --ok: #17701a;
+  --ok-tint: #e6f4e6;
+  --warn: #8a5800;
+  --warn-tint: #fbf0d9;
+  --bad: #b3261e;
+  --bad-tint: #fcebea;
+
+  /* Type: Poppins for everything people read; JetBrains Mono only where digits must line up in columns */
+  --font-sans: 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* Seven steps, 13px floor (project rule: no tiny text) */
+  --text-xs: 0.8125rem; /* 13 */
+  --text-sm: 0.875rem; /* 14 */
+  --text-md: 0.9375rem; /* 15 — body */
+  --text-lg: 1.0625rem; /* 17 */
+  --text-xl: 1.25rem; /* 20 */
+  --text-2xl: 1.625rem; /* 26 */
+  --text-3xl: 2.125rem; /* 34 */
+
+  --leading-tight: 1.2;
+  --leading-snug: 1.35;
+  --leading-normal: 1.55;
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  /* Space: 4px base */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-14: 56px;
+
+  /* Shape: square corners everywhere (project rule) */
+  --radius: 0;
+  --rule: 1px solid var(--line);
+  --rule-strong: 1px solid var(--line-strong);
+
+  /* Layout */
+  --sidebar-width: 248px;
+  --topbar-height: 64px;
+  --content-max: 1280px;
+  --gutter: clamp(16px, 3vw, 40px);
+
+  /* Focus: always visible, never colour-only */
+  --focus-ring: 2px solid var(--black);
+  --focus-offset: 2px;
+
+  /* Motion: only in answer to an action */
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --fast: 120ms;
+  --medium: 200ms;
+
+  --z-sticky: 10;
+  --z-overlay: 100;
+  --z-toast: 200;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --fast: 0ms;
+    --medium: 0ms;
+  }
+}

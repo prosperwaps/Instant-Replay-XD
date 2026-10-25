@@ -63,7 +63,7 @@ export function formatFrancsCompact(amount: Francs): string {
 
 /** Reads what a person typed ("150 000", "150,000", "FCFA 150000") into francs, or explains why not. */
 export function parseFrancs(input: string): { ok: true; value: Francs } | { ok: false; error: string } {
-  const cleaned = input.replace(/fcfa|xaf/gi, '').replace(/[\s,  ]/g, '');
+  const cleaned = input.replace(/fcfa|xaf/gi, '').replace(/[\s,\u00a0\u202f]/g, '');
   if (cleaned === '') return { ok: false, error: 'Enter an amount.' };
   if (!/^\d+$/.test(cleaned)) return { ok: false, error: 'Use whole francs, digits only.' };
   const value = Number(cleaned);

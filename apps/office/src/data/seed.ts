@@ -266,7 +266,7 @@ export function createSeed(now: Date): Database {
       const marks: Register['marks'] = {};
       for (const s of classStudents(cls.id)) {
         const x = r();
-        marks[s.id] = x < 0.925 ? 'P' : x < 0.958 ? 'L' : x < 0.99 ? 'A' : 'E';
+        marks[s.id] = x < 0.9 ? 'P' : x < 0.94 ? 'L' : x < 0.985 ? 'A' : 'E';
       }
       registers.push({ id: `rg-${cls.id.slice(3)}-${day}`, classId: cls.id, day, takenBy: cls.master, takenAt: at(day, 7, 40 + Math.floor(r() * 25)), marks });
     }
